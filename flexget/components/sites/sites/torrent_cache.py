@@ -12,7 +12,6 @@ MIRRORS = [
     'https://thetorrent.org/',
     'http://torrage.com/torrent/',
     'http://zoink.it/torrent/',
-    'http://itorrents.org/torrent/',
 ]
 
 
