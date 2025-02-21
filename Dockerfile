@@ -19,10 +19,10 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --frozen --no-dev --group=all --no-install-project
+    uv sync --frozen --no-dev --all-groups --all-extras --no-install-project
 ADD . /flexget
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --frozen --no-dev --group=all
+    uv sync --frozen --no-dev --all-groups --all-extras
 
 # Final image without uv
 # TODO: Alpine version is pinned due to https://github.com/Flexget/Flexget/issues/4085
@@ -36,7 +36,7 @@ RUN --mount=type=cache,target=/var/cache/apk \
         tzdata
 
 # Copy the application from the builder
-COPY --from=builder --chown=app:app /flexget /flexget
+COPY --from=builder /flexget /flexget
 
 # Place executables in the environment at the front of the path
 ENV PATH="/flexget/.venv/bin:$PATH"
